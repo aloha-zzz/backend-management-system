@@ -21,12 +21,12 @@ async function addCourse(ctx) {
         const cid = await query(`select max(cid) as cid from course`);
         let maxCid = cid[0].cid;
         console.log('add course')
-        // await query(`insert into course (cname, credit) values('${title}', '${credit}')`)
-        // await query(`insert into mtoc (mid, cid) values( ${mid}, ${maxCid + 1} )`) // mtoc 外键要放到后面
+        await query(`insert into course (cname, credit) values('${title}', '${credit}')`)
+        await query(`insert into mtoc (mid, cid) values( ${mid}, ${maxCid + 1} )`) // mtoc 外键要放到后面
        
-        transaction([`insert into course (cname, credit) values('${title}', '${credit}')`,
-            `insert into mtoc (mid, cid) values( ${mid}, ${maxCid + 1} )`
-        ])
+        // transaction([`insert into course (cname, credit) values('${title}', '${credit}')`,
+        //     `insert into mtoc (mid, cid) values( ${mid}, ${maxCid + 1} )`
+        // ])
     }
 
     ctx.body = {
