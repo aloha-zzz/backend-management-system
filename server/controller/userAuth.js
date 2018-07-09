@@ -18,7 +18,7 @@ async function verifyLogin(ctx) {
 
     if (ans.length === 0) {
         ctx.body = {
-            code: -1,
+            code: -2,
             wrongInfo: 'username or password wrong'
         }
         return;

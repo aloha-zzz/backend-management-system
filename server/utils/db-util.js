@@ -9,7 +9,6 @@ const pool = mysql.createPool({
 })
 
 function query(sql) {
-    console.log(sql);
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
             if (err) {
@@ -28,7 +27,6 @@ function query(sql) {
     })
 }
 
-
 function transaction(sqlArr) {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
@@ -40,6 +38,8 @@ function transaction(sqlArr) {
                 if (err) {
                     reject(err);
                 }
+                console.log('Transaction start' + sql.length + '条sql')
+
                 (async () => {
                     for (let i = 0, len = sqlArr.length; i < len; i++) {
                         await query(sqlArr[i]).then(() => console.log(i, 'success')).catch((err) => {
